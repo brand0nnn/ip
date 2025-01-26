@@ -20,6 +20,8 @@ public class Dino {
 
     public static void main(String[] args) {
         sayHello();
+        String[] list = new String[100];
+        int size = 0;
         boolean goodbye = false;
         String line;
         Scanner in = new Scanner(System.in);
@@ -28,9 +30,18 @@ public class Dino {
             if (line.equals("bye")) {
                 goodbye = true;
             }
+            else if (line.equals("list")) {
+                printLine();
+                for (int i = 0; i < size; i++) {
+                    System.out.println(i+1 + ". " + list[i]);
+                }
+                printLine();
+            }
             else {
                 printLine();
-                System.out.println(line);
+                list[size] = line;
+                size++;
+                System.out.println("added: " + line);
                 printLine();
             }
         }
