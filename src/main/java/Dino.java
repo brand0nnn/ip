@@ -22,62 +22,55 @@ public class Dino {
         sayHello();
 
         String[] list = new String[100];
-        boolean[] checked = new boolean[100];
+        boolean[] isChecked = new boolean[100];
         int size = 0;
-        boolean goodbye = false;
+        boolean isExit = false;
         String line;
         Scanner in = new Scanner(System.in);
 
-        while (!goodbye) {
+        while (!isExit) {
             line = in.nextLine();
             if (line.equals("bye")) {
-                goodbye = true;
-            }
-            else if (line.equals("list")) {
+                isExit = true;
+            } else if (line.equals("list")) {
                 printLine();
-                char check;
+                char mark;
                 for (int i = 0; i < size; i++) {
-                    if (checked[i]) {
-                        check = 'X';
+                    if (isChecked[i]) {
+                        mark = 'X';
+                    } else {
+                        mark = ' ';
                     }
-                    else {
-                        check = ' ';
-                    }
-                    System.out.println(i+1 + ".[" + check + "] " + list[i]);
+                    System.out.println(i+1 + ".[" + mark + "] " + list[i]);
                 }
                 printLine();
-            }
-            else if (line.startsWith("mark ")) {
+            } else if (line.startsWith("mark ")) {
                 printLine();
                 String number = line.substring(5);
                 int val = Integer.parseInt(number);
-                if (checked[val-1]) {
+                if (isChecked[val-1]) {
                     System.out.println("Oops, this item has already been marked!");
                     printLine();
-                }
-                else {
-                    checked[val - 1] = true;
+                } else {
+                    isChecked[val-1] = true;
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("  [X] " + list[val - 1]);
+                    System.out.println("  [X] " + list[val-1]);
                     printLine();
                 }
-            }
-            else if (line.startsWith("unmark ")) {
+            } else if (line.startsWith("unmark ")) {
                 printLine();
                 String number = line.substring(7);
                 int val = Integer.parseInt(number);
-                if (!checked[val-1]) {
+                if (!isChecked[val-1]) {
                     System.out.println("Oops, this item is already unmarked!");
                     printLine();
-                }
-                else {
-                    checked[val-1] = false;
+                } else {
+                    isChecked[val-1] = false;
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println("  [ ] " + list[val-1]);
                     printLine();
                 }
-            }
-            else {
+            } else {
                 printLine();
                 list[size] = line;
                 size++;
