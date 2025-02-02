@@ -85,7 +85,7 @@ public class Dino {
             break;
         }
         printLine();
-        System.out.println("Got it. I've added this task: ");
+        System.out.println("Got it. I've added this task:");
         System.out.println("  [" + tasks[size].getTypeIcon() + "][ ] " + task);
         System.out.println("Now you have " + (size + 1) + " tasks in the list.");
         printLine();
