@@ -56,32 +56,23 @@ public class Dino {
     }
 
     public static void addItem(Task[] tasks, int size, String line, Type type) {
-        int startIndex;
         String task = "";
-        String sentence;
+        String[] parts;
         switch (type) {
         case TODO:
-            startIndex = 5;
-            task = line.substring(startIndex);
+            task = line.split(" ", 2)[1].trim();
             tasks[size] = new Todo(task);
             break;
         case DEADLINE:
-            startIndex = 9;
-            sentence = line.substring(startIndex);
-            int end = sentence.indexOf("/by") - 1;
-            task = sentence.substring(0, end);
-            String date = sentence.substring(end + 5);
-            tasks[size] = new Deadline(task, date);
+            parts = line.split("/by", 2);
+            task = parts[0].substring(9).trim();
+            tasks[size] = new Deadline(task, parts[1].trim());
             break;
         case EVENT:
-            startIndex = 6;
-            sentence = line.substring(startIndex);
-            int startSlash = sentence.indexOf("/from");
-            int endSlash = sentence.indexOf("/to");
-            task = sentence.substring(0, startSlash - 1);
-            String startDate = sentence.substring(startSlash + 6, endSlash - 1);
-            String endDate = sentence.substring(endSlash + 4);
-            tasks[size] = new Event(task, startDate, endDate);
+            parts = line.split("/from", 2);
+            task = parts[0].substring(6).trim();
+            String[] dates = parts[1].trim().split("/to", 2);
+            tasks[size] = new Event(task, dates[0].trim(), dates[1].trim());
             break;
         }
         printLine();
