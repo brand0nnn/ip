@@ -21,7 +21,8 @@ public class Dino {
     public static void displayList(Task[] tasks, int size) {
         printLine();
         for (int i = 0; i < size; i++) {
-            System.out.println(i+1 + ".[" + tasks[i].getStatusIcon() + "] " + tasks[i].description);
+            String date = tasks[i].getDate();
+            System.out.println(i+1 + ".[" + tasks[i].getTypeIcon() + "][" + tasks[i].getStatusIcon() + "] " + tasks[i].description + date);
         }
         printLine();
     }
@@ -54,6 +55,42 @@ public class Dino {
         printLine();
     }
 
+    public static void addItem(Task[] tasks, int size, String line, Type type) {
+        int startIndex;
+        String task = "";
+        String sentence;
+        switch (type) {
+        case TODO:
+            startIndex = 5;
+            task = line.substring(startIndex);
+            tasks[size] = new Todo(task);
+            break;
+        case DEADLINE:
+            startIndex = 9;
+            sentence = line.substring(startIndex);
+            int end = sentence.indexOf("/by") - 1;
+            task = sentence.substring(0, end);
+            String date = sentence.substring(end + 5);
+            tasks[size] = new Deadline(task, date);
+            break;
+        case EVENT:
+            startIndex = 6;
+            sentence = line.substring(startIndex);
+            int startSlash = sentence.indexOf("/from");
+            int endSlash = sentence.indexOf("/to");
+            task = sentence.substring(0, startSlash - 1);
+            String startDate = sentence.substring(startSlash + 6, endSlash - 1);
+            String endDate = sentence.substring(endSlash + 4);
+            tasks[size] = new Event(task, startDate, endDate);
+            break;
+        }
+        printLine();
+        System.out.println("Got it. I've added this task: ");
+        System.out.println("  [" + tasks[size].getTypeIcon() + "][ ] " + task);
+        System.out.println("Now you have " + (size + 1) + " tasks in the list.");
+        printLine();
+    }
+
     public static void main(String[] args) {
         sayHello();
 
@@ -69,15 +106,22 @@ public class Dino {
                 isExit = true;
             } else if (line.equals("list")) {
                 displayList(tasks, size);
+            } else if (line.startsWith("todo ")) {
+                addItem(tasks, size, line, Type.TODO);
+                size++;
+            } else if (line.startsWith("deadline ")) {
+                addItem(tasks, size, line, Type.DEADLINE);
+                size++;
+            } else if (line.startsWith("event ")) {
+                addItem(tasks, size, line, Type.EVENT);
+                size++;
             } else if (line.startsWith("mark ")) {
                 markItem(tasks, line);
             } else if (line.startsWith("unmark ")) {
                 unmarkItem(tasks, line);
             } else {
                 printLine();
-                tasks[size] = new Task(line);
-                size++;
-                System.out.println("added: " + line);
+                System.out.println("Im sorry, I don't understand what you mean by that");
                 printLine();
             }
         }
