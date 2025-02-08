@@ -1,3 +1,5 @@
+package dino;
+
 public class Deadline extends Task {
     protected String dateAndTime;
 

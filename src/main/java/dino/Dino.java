@@ -1,4 +1,8 @@
+package dino;
+
 import java.util.Scanner;
+import dino.exception.DinoException;
+import dino.exception.ExceptionMessage;
 
 public class Dino {
     public static void printLine() {
@@ -16,7 +20,7 @@ public class Dino {
 
     public static void sayHello() {
         printLine();
-        drawDino("Hello! I'm Dino :)");
+        drawDino("Hello! I'm dino.Dino :)");
         System.out.println("What can I do for you?");
         printLine();
     }
@@ -129,7 +133,7 @@ public class Dino {
                     addItem(tasks, size, line, Type.DEADLINE);
                     size++;
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("INPUT ERROR: Deadline end date not specified.");
+                    System.out.println("INPUT ERROR: dino.Deadline end date not specified.");
                     System.out.println("Check whether your command is correct: deadline {task name} /by {end date/time}");
                 } catch (DinoException e) {
                     System.out.println(e.getMessage());

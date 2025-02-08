@@ -1,3 +1,5 @@
+package dino;
+
 public class Event extends Task {
     protected String startDate;
     protected String endDate;
