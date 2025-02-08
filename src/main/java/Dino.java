@@ -5,16 +5,25 @@ public class Dino {
         System.out.println("____________________________________________________________");
     }
 
+    public static void drawDino(String message) {
+        System.out.println("               __");
+        System.out.println("              / _)    " + message);
+        System.out.println("     _.----._/ /");
+        System.out.println("    /         /");
+        System.out.println(" __/ (  | (  |");
+        System.out.println("/__.-'|_|--|_|");
+    }
+
     public static void sayHello() {
         printLine();
-        System.out.println("Hello! I'm Dino");
+        drawDino("Hello! I'm Dino :)");
         System.out.println("What can I do for you?");
         printLine();
     }
 
     public static void sayBye() {
         printLine();
-        System.out.println("Bye. Hope to see you again soon!");
+        drawDino("Byeee");
         printLine();
     }
 
