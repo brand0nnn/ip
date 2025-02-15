@@ -1,5 +1,6 @@
 package dino;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import dino.exception.DinoException;
@@ -128,16 +129,41 @@ public class Dino {
         if (!dir.exists()) {
             if (!dir.mkdir()) {
                 System.out.println("Error: Failed to make directory");
+                return;
             }
         }
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task task : tasks) {
-                fw.write("[" + task.getTypeIcon() + "][" + task.getStatusIcon() + "] " + task.description + task.getDate() + System.lineSeparator());
+                fw.write(task.getTypeIcon() + "|" + task.getStatusIcon() + "|" + task.description + "|" + task.getStartDate() + "|" + task.getEndDate() + System.lineSeparator());
             }
             fw.close();
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
+    public static void loadFile(String filePath, ArrayList<Task> tasks) {
+        File f = new File(filePath);
+        if (!f.exists()) {
+            return;
+        }
+        try {
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String line = s.nextLine().trim();
+                String[] parts = line.split("\\|", 5);
+                switch (parts[0]) {
+                case "T" -> tasks.add(new Todo(parts[2]));
+                case "D" -> tasks.add(new Deadline(parts[2], parts[4]));
+                case "E" -> tasks.add(new Event(parts[2], parts[3], parts[4]));
+                }
+                if (parts[1].equals("X")) {
+                    tasks.get(tasks.size() - 1).markAsDone();
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: File not found");
         }
     }
 
@@ -149,6 +175,7 @@ public class Dino {
         String line;
         Scanner in = new Scanner(System.in);
         String filePath = "data/savefile.txt";
+        loadFile(filePath, tasks);
 
         while (!isExit) {
             line = in.nextLine();

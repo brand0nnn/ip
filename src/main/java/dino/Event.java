@@ -17,4 +17,8 @@ public class Event extends Task {
     public String getDate() {
         return " (from: " + this.startDate + " to: " + this.endDate + ")";
     }
+
+    public String getStartDate() { return this.startDate; }
+
+    public String getEndDate() { return this.endDate; }
 }

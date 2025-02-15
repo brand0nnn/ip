@@ -21,6 +21,10 @@ public class Task {
         return "";
     }
 
+    public String getStartDate() { return ""; }
+
+    public String getEndDate() { return ""; }
+
     public void markAsDone() {
         this.isDone = true;
     }
