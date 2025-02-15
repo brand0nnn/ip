@@ -4,6 +4,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import dino.exception.DinoException;
 import dino.exception.ExceptionMessage;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Dino {
     public static void printLine() {
@@ -120,6 +123,24 @@ public class Dino {
         printLine();
     }
 
+    public static void saveToFile(String filePath, ArrayList<Task> tasks) {
+        File dir = new File("./data");
+        if (!dir.exists()) {
+            if (!dir.mkdir()) {
+                System.out.println("Error: Failed to make directory");
+            }
+        }
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            for (Task task : tasks) {
+                fw.write("[" + task.getTypeIcon() + "][" + task.getStatusIcon() + "] " + task.description + task.getDate() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         sayHello();
 
@@ -127,6 +148,7 @@ public class Dino {
         boolean isExit = false;
         String line;
         Scanner in = new Scanner(System.in);
+        String filePath = "data/savefile.txt";
 
         while (!isExit) {
             line = in.nextLine();
@@ -193,7 +215,7 @@ public class Dino {
                 printLine();
             }
         }
-
+        saveToFile(filePath, tasks);
         sayBye();
     }
 }
