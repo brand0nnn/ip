@@ -7,7 +7,8 @@ public enum ExceptionMessage {
     ITEM_UNMARKED("Oops, this item has already been unmarked!"),
     NO_BY_DATE("INPUT ERROR: No deadline end date specified"),
     NO_TO_DATE("INPUT ERROR: No event end date specified"),
-    INVALID_INDEX("INPUT ERROR: Index specified does not exist");
+    INVALID_INDEX("INPUT ERROR: Index specified does not exist"),
+    INVALID_COMMAND("INPUT ERROR: Invalid command entered");
 
     private final String message;
 
