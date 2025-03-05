@@ -7,19 +7,39 @@ import java.time.LocalDate;
 import dino.exception.DinoException;
 import dino.exception.ExceptionMessage;
 
+/**
+ * Represents a list storing all the tasks.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     private Ui ui;
 
+    /**
+     * Constructs the TaskList using the specified ArrayList of Task
+     *
+     * @param tasks An ArrayList of Task used to construct the TaskList
+     */
     TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
         ui = new Ui();
     }
 
+    /**
+     * Returns an ArrayList of Task containing all the tasks.
+     *
+     * @return All tasks as an ArrayList of Task
+     */
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
 
+    /**
+     * Adds a specified task into TaskList.
+     *
+     * @param line The user input command
+     * @param type The type of task to be added
+     * @throws DinoException If the command is empty, or if no date is specified for Deadline and Event type tasks
+     */
     public void addTask(String line, Type type) throws DinoException {
         String task = "";
         String[] parts;
@@ -64,6 +84,12 @@ public class TaskList {
         ui.printLine();
     }
 
+    /**
+     * Delete the specified task from TaskList
+     *
+     * @param line The user input command
+     * @throws DinoException If the command is empty or the specified task number does not exist
+     */
     public void deleteTask(String line) throws DinoException {
         ui.printLine();
         String number = line.split(" ", 2)[1].trim();
@@ -81,6 +107,13 @@ public class TaskList {
         ui.printLine();
     }
 
+    /**
+     * Marks or unmarks the specified task in TaskList.
+     *
+     * @param line The user input command
+     * @param mark True for mark, false for unmark
+     * @throws DinoException If the command is empty, or if the item has already been marked/unmarked
+     */
     public void markOrUnmarkTask(String line, boolean mark) throws DinoException {
         ui.printLine();
         String number = line.split(" ", 2)[1].trim();
