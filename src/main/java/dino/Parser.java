@@ -5,6 +5,7 @@ import dino.commands.Command;
 import dino.commands.DeleteCommand;
 import dino.commands.ExitCommand;
 import dino.commands.ListCommand;
+import dino.commands.FindCommand;
 import dino.commands.MarkOrUnmarkCommand;
 import dino.exception.DinoException;
 import dino.exception.ExceptionMessage;
@@ -60,6 +61,11 @@ public class Parser {
                 throw new DinoException(ExceptionMessage.INVALID_COMMAND);
             }
             return new DeleteCommand(input);
+        case "find":
+            if (splitSize == 1) {
+                throw new DinoException(ExceptionMessage.INVALID_COMMAND);
+            }
+            return new FindCommand(input);
         default:
             throw new DinoException(ExceptionMessage.INVALID_COMMAND);
         }
