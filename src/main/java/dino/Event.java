@@ -1,13 +1,21 @@
 package dino;
 
-public class Event extends Task {
-    protected String startDate;
-    protected String endDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String start, String end) {
+public class Event extends Task {
+    protected LocalDateTime startDate;
+    protected LocalDateTime endDate;
+    protected String formattedStartDate;
+    protected String formattedEndDate;
+
+    public Event(String description, LocalDateTime start, LocalDateTime end) {
         super(description);
         this.startDate = start;
         this.endDate = end;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+        formattedStartDate = startDate.format(formatter);
+        formattedEndDate = endDate.format(formatter);
     }
 
     public String getTypeIcon() {
@@ -15,10 +23,10 @@ public class Event extends Task {
     }
 
     public String getDate() {
-        return " (from: " + this.startDate + " to: " + this.endDate + ")";
+        return " (from: " + this.formattedStartDate + " to: " + this.formattedEndDate + ")";
     }
 
-    public String getStartDate() { return this.startDate; }
+    public String getStartDate() { return this.startDate.toString(); }
 
-    public String getEndDate() { return this.endDate; }
+    public String getEndDate() { return this.endDate.toString(); }
 }

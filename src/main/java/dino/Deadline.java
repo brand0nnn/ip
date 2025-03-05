@@ -1,11 +1,17 @@
 package dino;
 
-public class Deadline extends Task {
-    protected String dateAndTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String date) {
+public class Deadline extends Task {
+    protected LocalDate dateAndTime;
+    protected String formattedDate;
+
+    public Deadline(String description, LocalDate date) {
         super(description);
         this.dateAndTime = date;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        formattedDate = date.format(formatter);
     }
 
     public String getTypeIcon() {
@@ -13,8 +19,8 @@ public class Deadline extends Task {
     }
 
     public String getDate() {
-        return " (by: " + this.dateAndTime + ")";
+        return " (by: " + this.formattedDate + ")";
     }
 
-    public String getEndDate() { return this.dateAndTime; }
+    public String getEndDate() { return this.dateAndTime.toString(); }
 }

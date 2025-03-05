@@ -1,6 +1,9 @@
 package dino;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.time.LocalDate;
 import dino.exception.DinoException;
 import dino.exception.ExceptionMessage;
 
@@ -37,9 +40,11 @@ public class TaskList {
             if (parts[1].trim().isEmpty()) {
                 throw new DinoException(ExceptionMessage.NO_BY_DATE);
             }
-            tasks.add(new Deadline(task, parts[1].trim()));
+            LocalDate date = LocalDate.parse(parts[1].trim());
+            tasks.add(new Deadline(task, date));
             break;
         case EVENT:
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             if (line.split(" ", 2)[1].trim().isEmpty()) {
                 throw new DinoException(ExceptionMessage.EMPTY_COMMAND);
             }
@@ -49,7 +54,7 @@ public class TaskList {
             if (dates[1].trim().isEmpty()) {
                 throw new DinoException(ExceptionMessage.NO_TO_DATE);
             }
-            tasks.add(new Event(task, dates[0].trim(), dates[1].trim()));
+            tasks.add(new Event(task, LocalDateTime.parse(dates[0].trim(), formatter), LocalDateTime.parse(dates[1].trim(), formatter)));
             break;
         }
         ui.printLine();
