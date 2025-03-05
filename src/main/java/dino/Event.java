@@ -1,5 +1,8 @@
 package dino;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents an event with a start date and an end date
  * <p>
@@ -8,8 +11,10 @@ package dino;
  * </p>
  */
 public class Event extends Task {
-    protected String startDate;
-    protected String endDate;
+    protected LocalDateTime startDate;
+    protected LocalDateTime endDate;
+    protected String formattedStartDate;
+    protected String formattedEndDate;
 
     /**
      * Constructor for Event
@@ -18,10 +23,13 @@ public class Event extends Task {
      * @param start The start date of the event
      * @param end The end date of the event
      */
-    public Event(String description, String start, String end) {
+    public Event(String description, LocalDateTime start, LocalDateTime end) {
         super(description);
         this.startDate = start;
         this.endDate = end;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+        formattedStartDate = startDate.format(formatter);
+        formattedEndDate = endDate.format(formatter);
     }
 
     /**
@@ -39,7 +47,7 @@ public class Event extends Task {
      * @return A string in the format " (from: {startDate} to: {endDate})"
      */
     public String getDate() {
-        return " (from: " + this.startDate + " to: " + this.endDate + ")";
+        return " (from: " + this.formattedStartDate + " to: " + this.formattedEndDate + ")";
     }
 
     /**
@@ -47,12 +55,12 @@ public class Event extends Task {
      *
      * @return the start date as a string
      */
-    public String getStartDate() { return this.startDate; }
+    public String getStartDate() { return this.startDate.toString(); }
 
     /**
      * Returns the end date of the event
      *
      * @return the end date as a string
      */
-    public String getEndDate() { return this.endDate; }
+    public String getEndDate() { return this.endDate.toString(); }
 }

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -42,8 +44,8 @@ public class Storage {
                 String[] parts = line.split("\\|", 5);
                 switch (parts[0]) {
                 case "T" -> tasks.add(new Todo(parts[2]));
-                case "D" -> tasks.add(new Deadline(parts[2], parts[4]));
-                case "E" -> tasks.add(new Event(parts[2], parts[3], parts[4]));
+                case "D" -> tasks.add(new Deadline(parts[2], LocalDate.parse(parts[4])));
+                case "E" -> tasks.add(new Event(parts[2], LocalDateTime.parse(parts[3]), LocalDateTime.parse(parts[4])));
                 }
                 if (parts[1].equals("X")) {
                     tasks.get(tasks.size() - 1).markAsDone();

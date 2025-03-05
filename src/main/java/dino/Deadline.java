@@ -1,5 +1,8 @@
 package dino;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a deadline task with a due date.
  * <p>
@@ -8,7 +11,8 @@ package dino;
  * </p>
  */
 public class Deadline extends Task {
-    protected String date;
+    protected LocalDate dateAndTime;
+    protected String formattedDate;
 
     /**
      * Constructor for Deadline
@@ -16,9 +20,11 @@ public class Deadline extends Task {
      * @param description The description of the deadline
      * @param date The end date of the deadline
      */
-    public Deadline(String description, String date) {
+    public Deadline(String description, LocalDate date) {
         super(description);
-        this.date = date;
+        this.dateAndTime = date;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        formattedDate = date.format(formatter);
     }
 
     /**
@@ -36,7 +42,7 @@ public class Deadline extends Task {
      * @return A string in the format " (by: {dateAndTime})"
      */
     public String getDate() {
-        return " (by: " + this.date + ")";
+        return " (by: " + this.formattedDate + ")";
     }
 
     /**
@@ -44,5 +50,5 @@ public class Deadline extends Task {
      *
      * @return the due date as a string
      */
-    public String getEndDate() { return this.date; }
+    public String getEndDate() { return this.dateAndTime.toString(); }
 }
