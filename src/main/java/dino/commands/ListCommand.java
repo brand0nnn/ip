@@ -13,8 +13,7 @@ public class ListCommand extends Command {
         ArrayList<Task> tasks = taskList.getTasks();
         int size = tasks.size();
         for (int i = 0; i < size; i++) {
-            String date = tasks.get(i).getDate();
-            System.out.println(i+1 + ".[" + tasks.get(i).getTypeIcon() + "][" + tasks.get(i).getStatusIcon() + "] " + tasks.get(i).getDescription() + date);
+            System.out.println(i+1 + ".[" + tasks.get(i).getTypeIcon() + "][" + tasks.get(i).getStatusIcon() + "] " + tasks.get(i).getDescription() + tasks.get(i).getDate());
         }
     }
 }
