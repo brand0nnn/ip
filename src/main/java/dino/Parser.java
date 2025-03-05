@@ -9,8 +9,18 @@ import dino.commands.MarkOrUnmarkCommand;
 import dino.exception.DinoException;
 import dino.exception.ExceptionMessage;
 
+/**
+ * Parses the user input command and returns the corresponding command object.
+ */
 public class Parser {
-    public Command parseInput(String input) throws DinoException{
+    /**
+     * Parses the given input string and produces a corresponding command object.
+     *
+     * @param input The user input string representing the command
+     * @return The command object corresponding to the user input
+     * @throws DinoException if the input is invalid or missing required argument
+     */
+    public Command parseInput(String input) throws DinoException {
         String[] split = input.split(" ", 2);
         int splitSize = split.length;
         String command = split[0].toLowerCase();

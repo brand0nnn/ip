@@ -7,13 +7,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles the storage of task data by reading from and writing to a file.
+ */
 public class Storage {
     String filePath;
 
+    /**
+     * Constructor for Storage
+     *
+     * @param filePath The path to the save file where the data of TaskList is stored
+     */
     Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads and stores the data of the save file specified by filePath, if any,
+     * and returns it in a TaskList, else it returns an empty TaskList.
+     *
+     * @param filePath The path to the save file where the data of TaskList is stored
+     * @return an ArrayList of Task objects containing the loaded data, or an empty ArrayList if no save data exists
+     */
     public ArrayList<Task> load(String filePath) {
         ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
@@ -40,6 +55,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the data from the program to a save file with location specified by filePath
+     *
+     * @param filePath The path of the save file where the data of TaskList is stored
+     * @param tasklist The TaskList where the current data of the program is written
+     */
     public void save(String filePath, TaskList tasklist) {
         ArrayList<Task> tasks = tasklist.getTasks();
         File dir = new File("./data");
