@@ -1,5 +1,6 @@
 package dino.util;
 
+import dino.Dino;
 import dino.tasks.Type;
 import dino.commands.AddCommand;
 import dino.commands.Command;
@@ -23,6 +24,9 @@ public class Parser {
      * @throws DinoException if the input is invalid or missing required argument
      */
     public Command parseInput(String input) throws DinoException {
+        if (input.contains("|")) {
+            throw new DinoException(ExceptionMessage.ILLEGAL_CHARACTER);
+        }
         String[] split = input.split(" ", 2);
         int splitSize = split.length;
         String command = split[0].toLowerCase();

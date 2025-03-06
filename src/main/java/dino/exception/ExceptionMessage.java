@@ -8,6 +8,7 @@ public enum ExceptionMessage {
     NO_BY_DATE("INPUT ERROR: No deadline end date specified"),
     NO_TO_DATE("INPUT ERROR: No event end date specified"),
     INVALID_INDEX("INPUT ERROR: Index specified does not exist"),
+    ILLEGAL_CHARACTER("ILLEGAL CHARACTER: Do not use | in any commands"),
     INVALID_COMMAND("INPUT ERROR: Invalid command entered");
 
     private final String message;
