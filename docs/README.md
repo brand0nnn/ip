@@ -22,7 +22,7 @@ java -jar ip.jar
 |[`todo`](#adding-to-dos-todo)              |`<task name>`                          |
 |[`deadline`](#adding-deadlines-deadline)   |`<task name> /by <date>`               |
 |[`event`](#adding-events-event)            |`<task name> /from <start> /to <end>`  |
-|[`mark`](#mark-as-complete-mark)            |`<index>`                              |
+|[`mark`](#mark-as-complete-mark)           |`<index>`                              |
 |[`unmark`](#unmark-completion-unmark)      |`<index>`                              |
 |[`delete`](#deleting-a-task-delete)        |`<index>`                              |
 |[`find`](#finding-a-task-find)             |`<keyword>`                            |
