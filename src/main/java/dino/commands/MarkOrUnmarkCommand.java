@@ -1,6 +1,6 @@
 package dino.commands;
 
-import dino.TaskList;
+import dino.util.TaskList;
 import dino.exception.DinoException;
 
 /**

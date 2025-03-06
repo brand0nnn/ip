@@ -1,4 +1,4 @@
-package dino;
+package dino.util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,6 +8,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import dino.tasks.Deadline;
+import dino.tasks.Event;
+import dino.tasks.Task;
+import dino.tasks.Todo;
 
 /**
  * Handles the storage of task data by reading from and writing to a file.
@@ -20,7 +25,7 @@ public class Storage {
      *
      * @param filePath The path to the save file where the data of TaskList is stored
      */
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -75,7 +80,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task task : tasks) {
-                fw.write(task.getTypeIcon() + "|" + task.getStatusIcon() + "|" + task.description + "|" + task.getStartDate() + "|" + task.getEndDate() + System.lineSeparator());
+                fw.write(task.getTypeIcon() + "|" + task.getStatusIcon() + "|" + task.getDescription() + "|" + task.getStartDate() + "|" + task.getEndDate() + System.lineSeparator());
             }
             fw.close();
         } catch (IOException e) {

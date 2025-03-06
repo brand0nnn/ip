@@ -2,8 +2,8 @@ package dino.commands;
 
 import java.time.format.DateTimeParseException;
 
-import dino.TaskList;
-import dino.Type;
+import dino.util.TaskList;
+import dino.tasks.Type;
 import dino.exception.DinoException;
 
 /**

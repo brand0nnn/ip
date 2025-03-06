@@ -2,6 +2,10 @@ package dino;
 
 import dino.commands.Command;
 import dino.exception.DinoException;
+import dino.util.Parser;
+import dino.util.Storage;
+import dino.util.TaskList;
+import dino.util.Ui;
 
 public class Dino {
     private static Ui ui;

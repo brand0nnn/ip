@@ -1,6 +1,6 @@
 package dino.commands;
 
-import dino.TaskList;
+import dino.util.TaskList;
 
 /**
  * Represents a general Command that contains the user input command.

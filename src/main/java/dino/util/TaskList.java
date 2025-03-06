@@ -1,27 +1,31 @@
-package dino;
+package dino.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.LocalDate;
+
+import dino.tasks.Type;
 import dino.exception.DinoException;
 import dino.exception.ExceptionMessage;
+import dino.tasks.Deadline;
+import dino.tasks.Event;
+import dino.tasks.Task;
+import dino.tasks.Todo;
 
 /**
  * Represents a list storing all the tasks.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
-    private Ui ui;
 
     /**
      * Constructs the TaskList using the specified ArrayList of Task
      *
      * @param tasks An ArrayList of Task used to construct the TaskList
      */
-    TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
-        ui = new Ui();
     }
 
     /**
@@ -98,7 +102,7 @@ public class TaskList {
             throw new DinoException(ExceptionMessage.INVALID_INDEX);
         }
         System.out.println("Got it. I've removed this task:");
-        System.out.println("  [" + tasks.get(val-1).getTypeIcon() + "][" + tasks.get(val-1).getStatusIcon() + "] " + tasks.get(val-1).description + tasks.get(val-1).getDate());
+        System.out.println("  [" + tasks.get(val-1).getTypeIcon() + "][" + tasks.get(val-1).getStatusIcon() + "] " + tasks.get(val-1).getDescription() + tasks.get(val-1).getDate());
         tasks.remove(val-1);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
@@ -116,20 +120,20 @@ public class TaskList {
             throw new DinoException(ExceptionMessage.EMPTY_COMMAND);
         }
         int val = Integer.parseInt(number);
-        if (mark && tasks.get(val-1).isDone) {
+        if (mark && tasks.get(val-1).getStatus()) {
             throw new DinoException(ExceptionMessage.ITEM_MARKED);
         }
-        if (!mark && !tasks.get(val-1).isDone) {
+        if (!mark && !tasks.get(val-1).getStatus()) {
             throw new DinoException(ExceptionMessage.ITEM_UNMARKED);
         }
         if (mark) {
             tasks.get(val-1).markAsDone();
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println("  [X] " + tasks.get(val-1).description);
+            System.out.println("  [X] " + tasks.get(val-1).getDescription());
         } else {
             tasks.get(val-1).unmarkAsDone();
             System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println("  [ ] " + tasks.get(val-1).description);
+            System.out.println("  [ ] " + tasks.get(val-1).getDescription());
         }
     }
 }

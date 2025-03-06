@@ -1,4 +1,4 @@
-package dino;
+package dino.tasks;
 
 /**
  * Represents a general task with a description and completion status.
@@ -24,6 +24,15 @@ public class Task {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Returns the status of this task
+     *
+     * @return the task status as a boolean value
+     */
+    public boolean getStatus() {
+        return this.isDone;
     }
 
     /**

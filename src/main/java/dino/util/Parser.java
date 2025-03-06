@@ -1,5 +1,6 @@
-package dino;
+package dino.util;
 
+import dino.tasks.Type;
 import dino.commands.AddCommand;
 import dino.commands.Command;
 import dino.commands.DeleteCommand;

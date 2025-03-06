@@ -1,8 +1,8 @@
 package dino.commands;
 
 import java.util.ArrayList;
-import dino.Task;
-import dino.TaskList;
+import dino.tasks.Task;
+import dino.util.TaskList;
 
 /**
  * Represents a ListCommand to list all the tasks in the task list.

@@ -1,4 +1,4 @@
-package dino;
+package dino.tasks;
 
 /**
  * Represents a todo task

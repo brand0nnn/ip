@@ -1,9 +1,9 @@
 package dino.commands;
 
 import java.util.ArrayList;
-import dino.Task;
-import dino.TaskList;
-import dino.Ui;
+import dino.tasks.Task;
+import dino.util.TaskList;
+import dino.util.Ui;
 
 public class FindCommand extends Command {
     private Ui ui;
