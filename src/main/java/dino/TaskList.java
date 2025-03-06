@@ -77,11 +77,9 @@ public class TaskList {
             tasks.add(new Event(task, LocalDateTime.parse(dates[0].trim(), formatter), LocalDateTime.parse(dates[1].trim(), formatter)));
             break;
         }
-        ui.printLine();
         System.out.println("Got it. I've added this task:");
         System.out.println("  [" + tasks.get(tasks.size() - 1).getTypeIcon() + "][ ] " + task);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        ui.printLine();
     }
 
     /**
@@ -91,7 +89,6 @@ public class TaskList {
      * @throws DinoException If the command is empty or the specified task number does not exist
      */
     public void deleteTask(String line) throws DinoException {
-        ui.printLine();
         String number = line.split(" ", 2)[1].trim();
         if (number.isEmpty()) {
             throw new DinoException(ExceptionMessage.EMPTY_COMMAND);
@@ -104,7 +101,6 @@ public class TaskList {
         System.out.println("  [" + tasks.get(val-1).getTypeIcon() + "][" + tasks.get(val-1).getStatusIcon() + "] " + tasks.get(val-1).description + tasks.get(val-1).getDate());
         tasks.remove(val-1);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        ui.printLine();
     }
 
     /**
@@ -115,7 +111,6 @@ public class TaskList {
      * @throws DinoException If the command is empty, or if the item has already been marked/unmarked
      */
     public void markOrUnmarkTask(String line, boolean mark) throws DinoException {
-        ui.printLine();
         String number = line.split(" ", 2)[1].trim();
         if (number.isEmpty()) {
             throw new DinoException(ExceptionMessage.EMPTY_COMMAND);
@@ -136,6 +131,5 @@ public class TaskList {
             System.out.println("OK, I've marked this task as not done yet:");
             System.out.println("  [ ] " + tasks.get(val-1).description);
         }
-        ui.printLine();
     }
 }

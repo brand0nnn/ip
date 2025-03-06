@@ -17,7 +17,6 @@ public class FindCommand extends Command {
         String keyword = command.split(" ", 2)[1].trim();
         ArrayList<Task> tasks = tasklist.getTasks();
         int size = tasks.size();
-        ui.printLine();
         System.out.println("Here are the matching tasks in your list:");
         for (int i = 0; i < size; i++) {
             String description = tasks.get(i).getDescription();
@@ -25,6 +24,5 @@ public class FindCommand extends Command {
                 System.out.println(i+1 + ".[" + tasks.get(i).getTypeIcon() + "][" + tasks.get(i).getStatusIcon() + "] " + tasks.get(i).getDescription() + tasks.get(i).getDate());
             }
         }
-        ui.printLine();
     }
 }
