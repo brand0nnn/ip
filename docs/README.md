@@ -16,6 +16,7 @@ Dino is a Command Line Interface (CLI) application that helps to keep track and 
 java -jar ip.jar
 ```
 ## Quick Reference
+
 |Command                                    |Parameters                             |
 |-------------------------------------------|---------------------------------------|
 |[`list`](#printing-task-list-list)         |None                                   |
