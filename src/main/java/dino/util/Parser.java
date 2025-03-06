@@ -1,6 +1,5 @@
 package dino.util;
 
-import dino.Dino;
 import dino.tasks.Type;
 import dino.commands.AddCommand;
 import dino.commands.Command;
@@ -29,7 +28,12 @@ public class Parser {
         }
         String[] split = input.split(" ", 2);
         int splitSize = split.length;
-        String command = split[0].toLowerCase();
+        String command = split[0].toLowerCase().trim();
+        boolean isSingleWord = splitSize == 1;
+        boolean isListOrExitCommand = command.equals("list") || command.equals("bye");
+        if (isSingleWord && !isListOrExitCommand) {
+            throw new DinoException(ExceptionMessage.INVALID_COMMAND);
+        }
 
         switch(command) {
         case "list":
@@ -37,39 +41,18 @@ public class Parser {
         case "bye":
             return new ExitCommand(input);
         case "mark":
-            if (splitSize == 1) {
-                throw new DinoException(ExceptionMessage.INVALID_COMMAND);
-            }
             return new MarkOrUnmarkCommand(input, true);
         case "unmark":
-            if (splitSize == 1) {
-                throw new DinoException(ExceptionMessage.INVALID_COMMAND);
-            }
             return new MarkOrUnmarkCommand(input, false);
         case "todo":
-            if (splitSize == 1) {
-                throw new DinoException(ExceptionMessage.INVALID_COMMAND);
-            }
             return new AddCommand(input, Type.TODO);
         case "event":
-            if (splitSize == 1) {
-                throw new DinoException(ExceptionMessage.INVALID_COMMAND);
-            }
             return new AddCommand(input, Type.EVENT);
         case "deadline":
-            if (splitSize == 1) {
-                throw new DinoException(ExceptionMessage.INVALID_COMMAND);
-            }
             return new AddCommand(input, Type.DEADLINE);
         case "delete":
-            if (splitSize == 1) {
-                throw new DinoException(ExceptionMessage.INVALID_COMMAND);
-            }
             return new DeleteCommand(input);
         case "find":
-            if (splitSize == 1) {
-                throw new DinoException(ExceptionMessage.INVALID_COMMAND);
-            }
             return new FindCommand(input);
         default:
             throw new DinoException(ExceptionMessage.INVALID_COMMAND);
