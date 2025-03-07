@@ -30,6 +30,8 @@ public class MarkOrUnmarkCommand extends Command {
             tasks.markOrUnmarkTask(command, mark);
         } catch (DinoException e) {
             System.out.println(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Index specified does not exist");
         }
     }
 }

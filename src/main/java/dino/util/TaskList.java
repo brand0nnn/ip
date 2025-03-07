@@ -60,6 +60,9 @@ public class TaskList {
                 throw new DinoException(ExceptionMessage.EMPTY_COMMAND);
             }
             parts = line.split("/by", 2);
+            if (parts.length == 1) {
+                throw new DinoException(ExceptionMessage.NO_BY_DATE);
+            }
             task = parts[0].substring(9).trim();
             if (parts[1].trim().isEmpty()) {
                 throw new DinoException(ExceptionMessage.NO_BY_DATE);
@@ -73,8 +76,14 @@ public class TaskList {
                 throw new DinoException(ExceptionMessage.EMPTY_COMMAND);
             }
             parts = line.split("/from", 2);
+            if (parts.length == 1) {
+                throw new DinoException(ExceptionMessage.NO_FROM_DATE);
+            }
             task = parts[0].substring(6).trim();
             String[] dates = parts[1].trim().split("/to", 2);
+            if (dates.length == 1) {
+                throw new DinoException(ExceptionMessage.NO_TO_DATE);
+            }
             if (dates[1].trim().isEmpty()) {
                 throw new DinoException(ExceptionMessage.NO_TO_DATE);
             }
@@ -114,7 +123,7 @@ public class TaskList {
      * @param mark True for mark, false for unmark
      * @throws DinoException If the command is empty, or if the item has already been marked/unmarked
      */
-    public void markOrUnmarkTask(String line, boolean mark) throws DinoException {
+    public void markOrUnmarkTask(String line, boolean mark) throws DinoException, IndexOutOfBoundsException {
         String number = line.split(" ", 2)[1].trim();
         if (number.isEmpty()) {
             throw new DinoException(ExceptionMessage.EMPTY_COMMAND);
