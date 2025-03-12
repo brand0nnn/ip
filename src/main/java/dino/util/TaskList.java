@@ -47,23 +47,19 @@ public class TaskList {
     public void addTask(String line, Type type) throws DinoException {
         String task = "";
         String[] parts;
+        if (line.split(" ", 2)[1].trim().isEmpty()) {
+            throw new DinoException(ExceptionMessage.EMPTY_COMMAND);
+        }
         switch (type) {
         case TODO:
-            task = line.split(" ", 2)[1].trim();
-            if (task.isEmpty()) {
-                throw new DinoException(ExceptionMessage.EMPTY_COMMAND);
-            }
             tasks.add(new Todo(task));
             break;
         case DEADLINE:
-            if (line.split(" ", 2)[1].trim().isEmpty()) {
-                throw new DinoException(ExceptionMessage.EMPTY_COMMAND);
-            }
             parts = line.split("/by", 2);
             if (parts.length == 1) {
                 throw new DinoException(ExceptionMessage.NO_BY_DATE);
             }
-            task = parts[0].substring(9).trim();
+            task = parts[0].split(" ", 2)[1].trim();
             if (parts[1].trim().isEmpty()) {
                 throw new DinoException(ExceptionMessage.NO_BY_DATE);
             }
@@ -72,14 +68,11 @@ public class TaskList {
             break;
         case EVENT:
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            if (line.split(" ", 2)[1].trim().isEmpty()) {
-                throw new DinoException(ExceptionMessage.EMPTY_COMMAND);
-            }
             parts = line.split("/from", 2);
             if (parts.length == 1) {
                 throw new DinoException(ExceptionMessage.NO_FROM_DATE);
             }
-            task = parts[0].substring(6).trim();
+            task = parts[0].split(" ", 2)[1].trim();
             String[] dates = parts[1].trim().split("/to", 2);
             if (dates.length == 1) {
                 throw new DinoException(ExceptionMessage.NO_TO_DATE);
@@ -89,6 +82,8 @@ public class TaskList {
             }
             tasks.add(new Event(task, LocalDateTime.parse(dates[0].trim(), formatter), LocalDateTime.parse(dates[1].trim(), formatter)));
             break;
+        default:
+            throw new DinoException(ExceptionMessage.ERROR);
         }
         System.out.println("Got it. I've added this task:");
         System.out.println("  [" + tasks.get(tasks.size() - 1).getTypeIcon() + "][ ] " + task);
@@ -107,7 +102,7 @@ public class TaskList {
             throw new DinoException(ExceptionMessage.EMPTY_COMMAND);
         }
         int val = Integer.parseInt(number);
-        if (val > tasks.size()) {
+        if (val > tasks.size() || val == 0) {
             throw new DinoException(ExceptionMessage.INVALID_INDEX);
         }
         System.out.println("Got it. I've removed this task:");

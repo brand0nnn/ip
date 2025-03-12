@@ -9,7 +9,8 @@ public enum ExceptionMessage {
     NO_FROM_DATE("INPUT ERROR: No event start date specified"),
     INVALID_INDEX("INPUT ERROR: Index specified does not exist"),
     ILLEGAL_CHARACTER("ILLEGAL CHARACTER: Do not use | in any commands"),
-    INVALID_COMMAND("INPUT ERROR: Invalid command entered");
+    INVALID_COMMAND("INPUT ERROR: Invalid command entered"),
+    ERROR("ERROR: Oops, something went wrong!");
 
     private final String message;
 

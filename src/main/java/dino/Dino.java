@@ -12,12 +12,17 @@ public class Dino {
     private static Storage storage;
     private static TaskList tasks;
     private static Parser parser;
+    private static final String filePath = "data/savefile.txt";
 
     public Dino(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        tasks = new TaskList(storage.load(filePath));
-        parser = new Parser();
+        try {
+            ui = new Ui();
+            storage = new Storage(filePath);
+            tasks = new TaskList(storage.load(filePath));
+            parser = new Parser();
+        } catch (DinoException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void run(String filePath) {
@@ -40,7 +45,6 @@ public class Dino {
     }
 
     public static void main(String[] args) {
-        String filePath = "data/savefile.txt";
         new Dino(filePath).run(filePath);
     }
 }

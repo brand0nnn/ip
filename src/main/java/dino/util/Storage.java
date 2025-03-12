@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import dino.exception.DinoException;
+import dino.exception.ExceptionMessage;
 import dino.tasks.Deadline;
 import dino.tasks.Event;
 import dino.tasks.Task;
@@ -36,7 +38,7 @@ public class Storage {
      * @param filePath The path to the save file where the data of TaskList is stored
      * @return an ArrayList of Task objects containing the loaded data, or an empty ArrayList if no save data exists
      */
-    public ArrayList<Task> load(String filePath) {
+    public ArrayList<Task> load(String filePath) throws DinoException {
         ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
         if (!f.exists()) {
@@ -48,9 +50,17 @@ public class Storage {
                 String line = s.nextLine().trim();
                 String[] parts = line.split("\\|", 5);
                 switch (parts[0]) {
-                case "T" -> tasks.add(new Todo(parts[2]));
-                case "D" -> tasks.add(new Deadline(parts[2], LocalDate.parse(parts[4])));
-                case "E" -> tasks.add(new Event(parts[2], LocalDateTime.parse(parts[3]), LocalDateTime.parse(parts[4])));
+                case "T":
+                    tasks.add(new Todo(parts[2]));
+                    break;
+                case "D":
+                    tasks.add(new Deadline(parts[2], LocalDate.parse(parts[4])));
+                    break;
+                case "E":
+                    tasks.add(new Event(parts[2], LocalDateTime.parse(parts[3]), LocalDateTime.parse(parts[4])));
+                    break;
+                default:
+                    throw new DinoException(ExceptionMessage.ERROR);
                 }
                 if (parts[1].equals("X")) {
                     tasks.get(tasks.size() - 1).markAsDone();
